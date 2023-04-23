@@ -1,0 +1,13 @@
+node_modules
+# Keep environment variables out of version control
+.env
+dist/
+**/lib/
+!**/src/lib/
+.idea/
+.yarn
+.yarnrc
+yarn-error.log
+**/*.dev.*
+package-lock.json
+report.*.json
