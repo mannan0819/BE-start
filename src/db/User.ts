@@ -10,7 +10,7 @@ export async function createAdmin() {
     data: {
       name: "mannan",
       email: "tes@test.com",
-      password: await byscpt.hash("!mannan", 10),
+      password: await byscpt.hash("!mannan ", 10),
       isAdmin: true,
       token,
     },
