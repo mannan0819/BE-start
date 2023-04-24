@@ -80,4 +80,4 @@ app.use(async (ctx: Context, next: Next) => {
 app.use(userRouter.routes());
 app.use(userRouter.allowedMethods());
 
-app.listen(process.env.PORT, () => console.log("Server is running on port 3000"));
+app.listen(process.env.PORT, () => console.log(`Server is running on port ${process.env.PORT}`));
