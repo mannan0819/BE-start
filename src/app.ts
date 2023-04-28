@@ -13,47 +13,47 @@ app.use(async (ctx, next) => {
   } else await next();
 });
 
-app.use(
-  cors({
-    credentials: true,
-    allowHeaders: [
-      "Access-Control-Allow-Origin",
-      "Access-Control-Allow-Headers",
-      "Access-Control-Request-Method",
-      "Access-Control-Request-Headers",
-      "Origin",
-      "Accept",
-      "X-Requested-With",
-      "Content-Type",
-      "rs-lang",
-    ],
-    allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS",
-    origin: (ctx: Context) => {
-      // if (
-      //   ctx.request.header.origin!.startsWith("http://localhost")
-      //   // && process.env.NODE_ENV?.toLocaleLowerCase() !== 'production'
-      // ) {
-        return ctx.request.header.origin!;
-      // }
+app.use(cors());
+  //   {
+  //   credentials: true,
+  //   allowHeaders: [
+  //     "Access-Control-Allow-Origin",
+  //     "Access-Control-Allow-Headers",
+  //     "Access-Control-Request-Method",
+  //     "Access-Control-Request-Headers",
+  //     "Origin",
+  //     "Accept",
+  //     "X-Requested-With",
+  //     "Content-Type",
+  //     "rs-lang",
+  //   ],
+  //   allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS",
+  //   origin: (ctx: Context) => {
+  //     // if (
+  //     //   ctx.request.header.origin!.startsWith("http://localhost")
+  //     //   // && process.env.NODE_ENV?.toLocaleLowerCase() !== 'production'
+  //     // ) {
+  //       return ctx.request.header.origin!;
+  //     // }
 
-      if (ctx.request.header.origin!.endsWith(".test.dev")) {
-        return ctx.request.header.origin!;
-      }
+  //     if (ctx.request.header.origin!.endsWith(".test.dev")) {
+  //       return ctx.request.header.origin!;
+  //     }
 
-      const productionOrigins = ["app.test.com"];
+  //     const productionOrigins = ["app.test.com"];
 
-      if (
-        productionOrigins.some((origin) =>
-          ctx.request.header.origin!.endsWith(origin)
-        )
-      ) {
-        return ctx.request.header.origin!;
-      }
+  //     if (
+  //       productionOrigins.some((origin) =>
+  //         ctx.request.header.origin!.endsWith(origin)
+  //       )
+  //     ) {
+  //       return ctx.request.header.origin!;
+  //     }
 
-      return "";
-    },
-  })
-);
+  //     return "";
+  //   },
+  // })
+// );
 
 // Log all requests
 app.use(logger());
