@@ -17,6 +17,7 @@ app.use(
   cors({
     credentials: true,
     allowHeaders: [
+      "Access-Control-Allow-Origin",
       "Access-Control-Allow-Headers",
       "Access-Control-Request-Method",
       "Access-Control-Request-Headers",
