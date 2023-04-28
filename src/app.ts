@@ -7,53 +7,54 @@ import { userRouter } from "./router/user-router";
 
 const app = new Koa();
 
+app.use(
+  cors(
+    {
+    credentials: true,
+    allowHeaders: [
+      "Access-Control-Allow-Origin",
+      "Access-Control-Allow-Headers",
+      "Access-Control-Request-Method",
+      "Access-Control-Request-Headers",
+      "Origin",
+      "Accept",
+      "X-Requested-With",
+      "Content-Type",
+      "rs-lang",
+    ],
+    allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS",
+    origin: (ctx: Context) => {
+      // if (
+      //   ctx.request.header.origin!.startsWith("http://localhost")
+      //   // && process.env.NODE_ENV?.toLocaleLowerCase() !== 'production'
+      // ) {
+        return ctx.request.header.origin!;
+      // }
+
+      if (ctx.request.header.origin!.endsWith(".test.dev")) {
+        return ctx.request.header.origin!;
+      }
+
+      const productionOrigins = ["app.test.com"];
+
+      if (
+        productionOrigins.some((origin) =>
+          ctx.request.header.origin!.endsWith(origin)
+        )
+      ) {
+        return ctx.request.header.origin!;
+      }
+
+      return "";
+    },
+  })
+);
+
 app.use(async (ctx, next) => {
   if (ctx.path === "/") {
     ctx.status = 200;
   } else await next();
 });
-
-app.use(cors());
-  //   {
-  //   credentials: true,
-  //   allowHeaders: [
-  //     "Access-Control-Allow-Origin",
-  //     "Access-Control-Allow-Headers",
-  //     "Access-Control-Request-Method",
-  //     "Access-Control-Request-Headers",
-  //     "Origin",
-  //     "Accept",
-  //     "X-Requested-With",
-  //     "Content-Type",
-  //     "rs-lang",
-  //   ],
-  //   allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS",
-  //   origin: (ctx: Context) => {
-  //     // if (
-  //     //   ctx.request.header.origin!.startsWith("http://localhost")
-  //     //   // && process.env.NODE_ENV?.toLocaleLowerCase() !== 'production'
-  //     // ) {
-  //       return ctx.request.header.origin!;
-  //     // }
-
-  //     if (ctx.request.header.origin!.endsWith(".test.dev")) {
-  //       return ctx.request.header.origin!;
-  //     }
-
-  //     const productionOrigins = ["app.test.com"];
-
-  //     if (
-  //       productionOrigins.some((origin) =>
-  //         ctx.request.header.origin!.endsWith(origin)
-  //       )
-  //     ) {
-  //       return ctx.request.header.origin!;
-  //     }
-
-  //     return "";
-  //   },
-  // })
-// );
 
 // Log all requests
 app.use(logger());
