@@ -16,6 +16,7 @@ app.use(
       "Access-Control-Allow-Headers",
       "Access-Control-Request-Method",
       "Access-Control-Request-Headers",
+      "Access-Control-Allow-Credentials",
       "Origin",
       "Accept",
       "X-Requested-With",
@@ -53,6 +54,7 @@ app.use(
 app.use(async (ctx, next) => {
   if (ctx.path === "/") {
     ctx.status = 200;
+    console.log('i am he')
   } else await next();
 });
 
