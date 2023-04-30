@@ -19,3 +19,13 @@ userRouter.get("/login", async (ctx: RouterContext | Context) => {
   );
   ctx.status = 200;
 });
+
+userRouter.post("/login", async (ctx: RouterContext | Context) => {
+  console.log("login user");
+  const userName = (ctx.request.body as any).username;
+  const password = (ctx.request.body as any).password;
+  ctx.body = await login(
+userName, password
+  );
+  ctx.status = 200;
+});
