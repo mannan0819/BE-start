@@ -19,6 +19,8 @@ userRouter.post("/login", async (ctx: RouterContext | Context) => {
   const loginRes = await login(
     userName, password
   );
+  console.log('lgin res');
+  console.log(loginRes);
   if(loginRes) {
     ctx.body = loginRes;
     ctx.status = 200;

@@ -23,8 +23,11 @@ export async function login(email: string, password: string) {
       email: email,
     },
   });
+  console.log('user');
+  console.log(user);
   if(!user) return null;
   if (await byscpt.compare(`!${password}`, user.password)) {
+    console.log('approved')
     return {user, token: getJWTToken(user)};
   } else {
     return undefined;
