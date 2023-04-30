@@ -11,21 +11,17 @@ userRouter.get("/create", async (ctx: RouterContext | Context) => {
   ctx.status = 200;
 });
 
-userRouter.get("/login", async (ctx: RouterContext | Context) => {
-  console.log("login user");
-  ctx.body = await login(
-    ctx.query.email as string,
-    ctx.query.password as string,
-  );
-  ctx.status = 200;
-});
-
 userRouter.post("/login", async (ctx: RouterContext | Context) => {
   console.log("login user");
   const userName = (ctx.request.body as any).username;
   const password = (ctx.request.body as any).password;
-  ctx.body = await login(
-userName, password
+  const loginRes = await login(
+    userName, password
   );
-  ctx.status = 200;
+  if(loginRes) {
+    ctx.body = loginRes;
+    ctx.status = 200;
+  } else {
+    ctx.status = 401;
+  }
 });

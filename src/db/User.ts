@@ -23,10 +23,10 @@ export async function login(email: string, password: string) {
       email: email,
     },
   });
-  if(!user) return "user not found";
+  if(!user) return null;
   if (await byscpt.compare(`!${password}`, user.password)) {
     return {user, token: getJWTToken(user)};
   } else {
-    return "wrong password";
+    return undefined;
   }
 }
