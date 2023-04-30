@@ -15,14 +15,12 @@ userRouter.post("/login", async (ctx: RouterContext | Context) => {
   console.log("login user");
   const userName = (ctx.request.body as any).username;
   const password = (ctx.request.body as any).password;
-  console.log(userName, password)
   const loginRes = await login(
     userName, password
   );
-  console.log('lgin res');
-  console.log(loginRes);
   if(loginRes) {
-    ctx.body = loginRes;
+    ctx.cookies.set('userToken', loginRes.token);
+    ctx.body = {...loginRes, token: undefined, password: undefined};
     ctx.status = 200;
   } else {
     ctx.status = 401;
