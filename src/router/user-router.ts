@@ -20,7 +20,10 @@ userRouter.post("/login", async (ctx: RouterContext | Context) => {
   );
   if(loginRes) {
     ctx.cookies.set('userToken', loginRes.token);
+    console.log(ctx.cookies)
     ctx.body = {...loginRes, token: undefined, password: undefined};
+    console.log('body')
+    console.log(ctx.body)
     ctx.status = 200;
   } else {
     ctx.status = 401;
