@@ -15,6 +15,7 @@ userRouter.post("/login", async (ctx: RouterContext | Context) => {
   console.log("login user");
   const userName = (ctx.request.body as any).username;
   const password = (ctx.request.body as any).password;
+  console.log(userName, password)
   const loginRes = await login(
     userName, password
   );
