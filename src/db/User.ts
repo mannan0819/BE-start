@@ -25,7 +25,7 @@ export async function login(email: string, password: string) {
   });
   if(!user) return null;
   if (await byscpt.compare(`!${password}`, user.password)) {
-    return {user, token: getJWTToken(user)};
+    return user;
   } else {
     return undefined;
   }
