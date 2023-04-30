@@ -21,7 +21,9 @@ userRouter.post("/login", async (ctx: RouterContext | Context) => {
   console.log('loginRes') 
   console.log(loginRes)
   if(loginRes) {
-    ctx.cookies.set('userToken', loginRes.token);
+    const expireIn30 = new Date();
+    expireIn30.setMinutes(expireIn30.getMinutes() + 30);
+    ctx.cookies.set('userToken', loginRes.token , { httpOnly: true, expires: expireIn30 });
     // console.log(ctx.cookies)
     ctx.body = {...loginRes, token: undefined, password: undefined};
     // console.log('body')
