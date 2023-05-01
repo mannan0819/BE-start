@@ -2,6 +2,7 @@ import Router from "@koa/router";
 import { Context } from "koa";
 import { RouterContext } from "@koa/router";
 import { createAdmin, login } from "../db/User";
+import { validateAndReturnUSER } from "../helpers/jwt";
 
 export const userRouter = new Router({ prefix: `/user` });
 
@@ -10,6 +11,13 @@ userRouter.get("/create", async (ctx: RouterContext | Context) => {
   ctx.body = await createAdmin();
   ctx.status = 200;
 });
+
+userRouter.get("/me", async (ctx: RouterContext | Context) => {
+  console.log("me");
+  ctx.body = await validateAndReturnUSER(ctx);
+  ctx.status = 200;
+});
+
 
 userRouter.post("/login", async (ctx: RouterContext | Context) => {
   console.log("login user");

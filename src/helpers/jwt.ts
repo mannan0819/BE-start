@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 
 export const validateAndReturnUSER = async (ctx: Context, expires: boolean = false): Promise<any | undefined> => {
   const userJWT = ctx.state.userJWT ? ctx.state.userJWT : ctx.cookies.get('userToken');
+  console.log('userJWT')
+  console.log(userJWT)
 
   if (userJWT === undefined || userJWT === '') {
     return undefined;
