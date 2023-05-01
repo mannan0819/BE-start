@@ -15,6 +15,8 @@ userRouter.get("/create", async (ctx: RouterContext | Context) => {
 userRouter.get("/me", async (ctx: RouterContext | Context) => {
   console.log("me");
   const userFromToken = await validateAndReturnUSER(ctx);
+  console.log('userFromToken')
+  console.log(userFromToken)
   if(userFromToken) {
     ctx.body = getUser(userFromToken.data.userid);
     ctx.status = 200;
