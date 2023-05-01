@@ -23,10 +23,9 @@ userRouter.post("/login", async (ctx: RouterContext | Context) => {
   if(loginRes) {
     const expireIn30 = new Date();
     expireIn30.setMinutes(expireIn30.getMinutes() + 30);
-    ctx.cookies.set('userToken', loginRes.token , { httpOnly: true, expires: expireIn30, secure: true, sameSite: 'none' });
+    ctx.cookies.set('userToken', loginRes.token , { httpOnly: true, expires: expireIn30, secure: true, domain: 'mannanapps.site' });
     ctx.body = {...loginRes, token: undefined, password: undefined};
-    // console.log('body')
-    // console.log(ctx.body)
+
     ctx.status = 200;
   } else {
     ctx.status = 401;
