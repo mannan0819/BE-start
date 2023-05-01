@@ -18,7 +18,7 @@ export async function createAdmin() {
 }
 
 export async function getUser(id: number) {
-  const user = prisma.user.findFirst({
+  const user = await prisma.user.findFirst({
     where: {
       id: id,
     },
