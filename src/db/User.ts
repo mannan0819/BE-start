@@ -25,6 +25,16 @@ export async function login(email: string, password: string) {
   });
   if(!user) return null;
   if (await byscpt.compare(`!${password}`, user.password)) {
+    const token = getJWTToken({ id: user.id, isAdmin: user.isAdmin });
+    user.token = token;
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        token,
+      },
+    });
     return user;
   } else {
     return undefined;
