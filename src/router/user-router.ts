@@ -24,7 +24,7 @@ userRouter.get("/me", async (ctx: RouterContext | Context) => {
     console.log('userFromToken.data.userid')
     console.log(userFromToken.data.userid)
 
-    ctx.body = getUser(userFromToken.data.userid);
+    ctx.body = await getUser(userFromToken.data.userid);
     ctx.status = 200;
   } else {
     ctx.status = 401;
