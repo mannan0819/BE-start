@@ -18,6 +18,12 @@ userRouter.get("/me", async (ctx: RouterContext | Context) => {
   console.log('userFromToken')
   console.log(userFromToken)
   if(userFromToken) {
+    console.log('userFromToken.data')
+    console.log(userFromToken.data)
+
+    console.log('userFromToken.data.userid')
+    console.log(userFromToken.data.userid)
+
     ctx.body = getUser(userFromToken.data.userid);
     ctx.status = 200;
   } else {
