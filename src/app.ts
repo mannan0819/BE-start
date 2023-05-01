@@ -6,7 +6,7 @@ import logger from "koa-logger";
 import { userRouter } from "./router/user-router";
 
 const app = new Koa();
-
+app.proxy = true;
 app.use(
   cors(
     {
