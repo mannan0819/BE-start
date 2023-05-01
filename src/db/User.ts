@@ -17,6 +17,20 @@ export async function createAdmin() {
   });
 }
 
+export async function getUser(id: number) {
+  const user = prisma.user.findFirst({
+    where: {
+      id: id,
+    },
+  });
+  if (user) return {
+    ...user,
+    password: undefined,
+    token: undefined,
+  }
+  return null;
+}
+
 export async function login(email: string, password: string) {
   const user = await prisma.user.findFirst({
     where: {
