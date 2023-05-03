@@ -94,7 +94,7 @@ app.use(authMiddleware);
 
 app.use(async (ctx: Context, next: Next) => {
     console.log("me");
-    console.log(ctx.state.userState)
+    console.log(ctx.state.userState.isAdmin)
     const userFromToken = await validateAndReturnUSER(ctx);
     console.log('userFromToken')
     console.log(userFromToken)
