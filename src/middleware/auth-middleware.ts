@@ -7,7 +7,7 @@ import { validateAndReturnUSER } from "../helpers/jwt";
 export default async (ctx: Context, next: Next) => {
   const userFromToken = await validateAndReturnUSER(ctx);
   if (userFromToken) {
-    ctx.state.userState = userFromToken;
+    ctx.state.userState = userFromToken.data;
     await next();
   }
   else {

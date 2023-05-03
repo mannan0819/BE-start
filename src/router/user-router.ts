@@ -4,15 +4,15 @@ import { RouterContext } from "@koa/router";
 import { createAdmin, getUser, login } from "../db/User";
 import { validateAndReturnUSER } from "../helpers/jwt";
 
-export const userRouter = new Router({ prefix: `/user` });
+export const publicRouter = new Router({ prefix: `/user` });
 
-userRouter.get("/create", async (ctx: RouterContext | Context) => {
+publicRouter.get("/create", async (ctx: RouterContext | Context) => {
   console.log("create user");
   ctx.body = await createAdmin();
   ctx.status = 200;
 });
 
-userRouter.get("/me", async (ctx: RouterContext | Context) => {
+publicRouter.get("/me", async (ctx: RouterContext | Context) => {
   console.log("me");
   const userFromToken = await validateAndReturnUSER(ctx);
   console.log('userFromToken')
@@ -32,7 +32,7 @@ userRouter.get("/me", async (ctx: RouterContext | Context) => {
 });
 
 
-userRouter.post("/login", async (ctx: RouterContext | Context) => {
+publicRouter.post("/login", async (ctx: RouterContext | Context) => {
   console.log("login user");
   const userName = (ctx.request.body as any).username;
   const password = (ctx.request.body as any).password;

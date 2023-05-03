@@ -3,10 +3,11 @@ import Koa, { Context, Next } from "koa";
 import cors from "@koa/cors";
 import bodyParser from "koa-bodyparser";
 import logger from "koa-logger";
-import { userRouter } from "./router/user-router";
+import { publicRouter } from "./router/user-router";
 import authMiddleware from "./middleware/auth-middleware";
 import { getUser } from "./db/User";
 import { validateAndReturnUSER } from "./helpers/jwt";
+import adminMiddleware from "./middleware/admin-middleware";
 
 const app = new Koa();
 app.proxy = true;
@@ -84,14 +85,16 @@ app.use(async (ctx: Context, next: Next) => {
 });
 
 //create a user route
-app.use(userRouter.routes());
-app.use(userRouter.allowedMethods());
+app.use(publicRouter.routes());
+app.use(publicRouter.allowedMethods());
 
 app.use(authMiddleware);
 
+// app.use(adminMiddleware);
+
 app.use(async (ctx: Context, next: Next) => {
     console.log("me");
-    console.log(ctx.state)
+    console.log(ctx.state.userState.data)
     const userFromToken = await validateAndReturnUSER(ctx);
     console.log('userFromToken')
     console.log(userFromToken)
