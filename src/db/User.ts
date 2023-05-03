@@ -54,3 +54,15 @@ export async function login(email: string, password: string) {
     return undefined;
   }
 }
+
+// get all users, select their name, id and email
+export async function getAllUsers() {
+  return prisma.user.findMany({
+    select: {
+      name: true,
+      id: true,
+      email: true,
+      isAdmin: true,
+    },
+  });
+}

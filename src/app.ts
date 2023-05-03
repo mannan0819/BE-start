@@ -8,6 +8,7 @@ import authMiddleware from "./middleware/auth-middleware";
 import { getUser } from "./db/User";
 import { validateAndReturnUSER } from "./helpers/jwt";
 import adminMiddleware from "./middleware/admin-middleware";
+import { adminRouter } from "./router/admin-router";
 
 const app = new Koa();
 app.proxy = true;
@@ -91,6 +92,8 @@ app.use(publicRouter.allowedMethods());
 app.use(authMiddleware);
 
 app.use(adminMiddleware);
+app.use(adminRouter.routes());
+app.use(adminRouter.allowedMethods());
 
 app.use(async (ctx: Context, next: Next) => {
     console.log("me");
