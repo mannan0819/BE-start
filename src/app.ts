@@ -90,7 +90,7 @@ app.use(publicRouter.allowedMethods());
 
 app.use(authMiddleware);
 
-// app.use(adminMiddleware);
+app.use(adminMiddleware);
 
 app.use(async (ctx: Context, next: Next) => {
     console.log("me");
